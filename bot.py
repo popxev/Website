@@ -4,10 +4,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 TOKEN = "7975587876:AAEPJnx7pt-qeqM41ijxg6dRU_wfzgEx1aA"
 
 CHANNEL_LINKS = """🔗 قنواتنا الرسمية:
-1️⃣ يوتيوب: [Popxev Games](https://youtube.com/@popxevgames-v1w?si=QulhnL1ZbhMU3mDK)
-2️⃣ إنستجرام: [Popxev Games](https://www.instagram.com/popxev_games?igsh=anNwdzR5dXFwc2E4)
+1️⃣ يوتيوب: [Popxev Games](https://youtube.com/@popxevgames-v)
+2️⃣ إنستجرام: [Popxev Games](https://www.instagram.com/popxev_games)
 3️⃣ فيسبوك: [Popxev Games](https://www.facebook.com/share/1Dsxdcv7yN/)
-4️⃣ جروب تيليجرام: [اضغط هنا](https://t.me/Popxevgamesgroup)
 5️⃣ ديسكورد: [انضم إلينا](https://discord.gg/hK33DD74QN)
 """
 
@@ -17,21 +16,21 @@ custom_replies = {
     "ما اسمك؟": "أنا بوت Popxev Games! 🤖"
 }
 
-async def start(update: Update, context: CallbackContext.DEFAULT_TYPE):
-    await update.message.reply_text(f"مرحبًا {update.effective_user.first_name}! 🎮\n{CHANNEL_LINKS}")
+async def start(update: Update, context: CallbackContext):
+    await update.message.reply_text(f"مرحبًا {update.effective_user.first_name}! كيف يمكنني مساعدتك؟")
 
-async def help_command(update: Update, context: CallbackContext.DEFAULT_TYPE):
-    await update.message.reply_text("🔹 أوامر البوت:\n/start - روابط القنوات 📢\n/help - المساعدة ℹ️")
+async def help_command(update: Update, context: CallbackContext):
+    await update.message.reply_text("🔹 أوامر البوت:\n/start - للترحيب بك\n/help - لعرض الأوامر\n/contact - للتواصل معنا\n/discord - للدخول إلى سيرفر ديسكورد")
 
-async def contact(update: Update, context: CallbackContext.DEFAULT_TYPE):
-    await update.message.reply_text("💬 للتواصل معنا، يمكنك إرسال رسالة عبر تيليجرام إلى: @Popxev_games")
+async def contact(update: Update, context: CallbackContext):
+    await update.message.reply_text("💬 للتواصل معنا، يمكنك مراسلتنا عبر القنوات الرسمية المدرجة في الأوامر.")
 
-async def discord(update: Update, context: CallbackContext.DEFAULT_TYPE):
-    await update.message.reply_text("🎮 انضم إلى سيرفر ديسكورد الخاص بنا:\n🔗 [اضغط هنا](https://discord.gg/hK33DD74QN)")
+async def discord(update: Update, context: CallbackContext):
+    await update.message.reply_text("🎮 انضم إلى سيرفر ديسكورد: https://discord.gg/hK33DD74QN")
 
-async def handle_messages(update: Update, context: CallbackContext.DEFAULT_TYPE):
+async def handle_messages(update: Update, context: CallbackContext):
     text = update.message.text
-    reply = custom_replies.get(text, "عذرًا، لا أفهم هذا الأمر! 🤔")
+    reply = custom_replies.get(text, "عذرًا، لا أفهم هذا السؤال.")
     await update.message.reply_text(reply)
 
 def main():
