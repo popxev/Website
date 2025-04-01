@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨Popxev games✨</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
-    <h1>PG Website</h1> 
-    <h2>مرحباً بك في موقعي🫵🥳</h2> 
-    
+    <h1>PG Website</h1>
+    <h2>مرحباً بك في موقعي🫵🥳</h2>
+    <div id="youtube-info">
+        <h3>معلومات قناة YouTube:</h3>
+        <p id="channel-name">جاري جلب البيانات...</p>
+        <p id="subscriber-count"></p>
+    </div>
     <div class="social-links">
         <div class="channel">
             <a href="https://youtube.com/@popxevgames-v1w?si=QulhnL1ZbhMU3mDK" target="_blank">
@@ -30,11 +34,32 @@
         </div>
         <div class="channel">
             <a href="https://t.me/Popxevgamesgroup" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Telegram_logo_2019.svg" alt="Telegram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Telegram_logo.svg" alt="Telegram">
             </a>
         </div>
     </div>
+    <script>
+        function init() {
+            gapi.client.init({
+                'apiKey': 'AIzaSyB1DjrbgZKLZ9Eq8vjr1uPMHtiwSmYyNkg',
+            }).then(function() {
+                return gapi.client.request({
+                    'path': 'https://www.googleapis.com/youtube/v3/channels',
+                    'params': {
+                        'part': 'snippet,statistics',
+                        'forUsername': 'popxevgames-v1w'
+                    }
+                });
+            }).then(function(response) {
+                document.getElementById('channel-name').innerText = response.result.items[0].snippet.title;
+                document.getElementById('subscriber-count').innerText = "عدد المشتركين: " + response.result.items[0].statistics.subscriberCount;
+            }, function(reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+        }
 
+        gapi.load('client', init);
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
