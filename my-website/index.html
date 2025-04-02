@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://apis.google.com/js/api.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>PG Website</h1>
     <h2>مرحباً بك في موقعي🫵🥳</h2>
     <p id="welcome-description">أنا هنا لمشاركة مغامراتي في عالم الألعاب، وخاصة ماين كرافت! تابعني على قنواتي للحصول على آخر التحديثات والمحتوى المثير.</p>
+    
     <div id="youtube-info">
         <h3>معلومات قناة YouTube:</h3>
         <p id="channel-name">جاري جلب البيانات...</p>
         <p id="subscriber-count"></p>
     </div>
+
     <div class="social-links">
         <div class="channel">
             <a href="https://youtube.com/@popxevgames-v1w?si=QulhnL1ZbhMU3mDK" target="_blank">
@@ -39,6 +42,18 @@
             </a>
         </div>
     </div>
+
+    <div class="adsense">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3760605454066208"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <script>
         function init() {
             gapi.client.init({
@@ -54,13 +69,14 @@
             }).then(function(response) {
                 document.getElementById('channel-name').innerText = response.result.items[0].snippet.title;
                 document.getElementById('subscriber-count').innerText = "عدد المشتركين: " + response.result.items[0].statistics.subscriberCount;
-            }, function(reason) {
-                console.log('Error: ' + reason.result.error.message);
+            }, function(error) {
+                console.error('Error:', error);
             });
         }
 
         gapi.load('client', init);
     </script>
+
     <script src="script.js"></script>
 </body>
 </html>
